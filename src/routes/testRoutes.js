@@ -1,21 +1,21 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { query, testConnection } = require('../config/database');
+const { query, testConnection } = require("../config/database");
 
-router.get('/connection', async (req, res, next) => {
+router.get("/connection", async (req, res, next) => {
   try {
     const connected = await testConnection();
     if (connected) {
-      res.json({ success: true, message: 'Conexión exitosa a PostgreSQL' });
+      res.json({ success: true, message: "Conexión exitosa a PostgreSQL" });
     } else {
-      res.status(500).json({ success: false, message: 'Error de conexión' });
+      res.status(500).json({ success: false, message: "Error de conexión" });
     }
   } catch (error) {
     next(error);
   }
 });
 
-router.get('/tables', async (req, res, next) => {
+router.get("/tables", async (req, res, next) => {
   try {
     const result = await query(`
       SELECT table_name 
@@ -29,10 +29,10 @@ router.get('/tables', async (req, res, next) => {
   }
 });
 
-router.post('/setup', async (req, res, next) => {
+router.post("/setup", async (req, res, next) => {
   try {
     await query(`
-      CREATE TABLE IF NOT EXISTS productos (
+      CREATE TABLE IF NOT EXISTS producto (
         id SERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         category VARCHAR(50) NOT NULL,
@@ -64,22 +64,22 @@ router.post('/setup', async (req, res, next) => {
       )
     `);
 
-    res.json({ success: true, message: 'Tablas creadas exitosamente' });
+    res.json({ success: true, message: "Tablas creadas exitosamente" });
   } catch (error) {
     next(error);
   }
 });
 
-router.get('/users', async (req, res, next) => {
+router.get("/users", async (req, res, next) => {
   try {
-    const productos = await query('SELECT * FROM productos');
-    const clientes = await query('SELECT * FROM clientes');
+    const productos = await query("SELECT * FROM productos");
+    const clientes = await query("SELECT * FROM clientes");
     res.json({
       success: true,
       data: {
         productos: productos.rows,
-        clientes: clientes.rows
-      }
+        clientes: clientes.rows,
+      },
     });
   } catch (error) {
     next(error);

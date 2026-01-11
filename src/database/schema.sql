@@ -1,318 +1,202 @@
--- ============================================
--- SCRIPT DE CREACIÓN DE BASE DE DATOS
--- Sistema de Gestión Comercial
--- ============================================
+-- =====================================================
+-- 1. CREAR BASE DE DATOS
+-- =====================================================
 
--- Eliminar tablas si existen (en orden inverso por dependencias)
-DROP TABLE IF EXISTS detalle_permiso;
-DROP TABLE IF EXISTS Permisos;
-DROP TABLE IF EXISTS Roles;
-DROP TABLE IF EXISTS detalle_compra;
-DROP TABLE IF EXISTS Compra;
-DROP TABLE IF EXISTS Usuarios;
-DROP TABLE IF EXISTS Cromoyentes;
-DROP TABLE IF EXISTS Rutas;
-DROP TABLE IF EXISTS Procesador;
-DROP TABLE IF EXISTS Zonas;
-DROP TABLE IF EXISTS Cliente;
-DROP TABLE IF EXISTS Pedidos;
-DROP TABLE IF EXISTS Categoria_productos;
-DROP TABLE IF EXISTS Productos;
-DROP TABLE IF EXISTS Estado_venta;
-DROP TABLE IF EXISTS Venta;
+CREATE DATABASE sistema_ventas;
 
--- ============================================
--- TABLA: Cliente
--- ============================================
-CREATE TABLE Cliente (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL,
-    documento VARCHAR(50),
-    tipo_documento VARCHAR(50),
-    email VARCHAR(50),
-    telefono VARCHAR(50),
-    direccion VARCHAR(255),
-    estado VARCHAR(50),
+-- Conectarse a la base de datos
+\c sistema_ventas;
+
+-- =====================================================
+-- 2. EXTENSIÓN UUID
+-- =====================================================
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- =====================================================
+-- 3. TABLAS MAESTRAS
+-- =====================================================
+
+CREATE TABLE clientes (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    nombre VARCHAR(100) NOT NULL,
+    documento VARCHAR(30) NOT NULL,
+    tipo_documento VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    telefono VARCHAR(20),
+    direccion TEXT,
+    estado VARCHAR(20) NOT NULL
 );
 
--- ============================================
--- TABLA: Zonas
--- ============================================
-CREATE TABLE Zonas (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    cliente_id INT,
-    ruta_id INT,
-    FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
-);
-
--- ============================================
--- TABLA: Rutas
--- ============================================
-CREATE TABLE Rutas (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_ruta VARCHAR(255) NOT NULL,
-    origen VARCHAR(100),
-    destino VARCHAR(100),
-    estado VARCHAR(50),
-    cliente_id INT,
-    FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
-);
-
--- ============================================
--- TABLA: Proveedor
--- ============================================
-CREATE TABLE Proveedor (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL,
-    tipo VARCHAR(100),
-    documento VARCHAR(50),
+CREATE TABLE proveedores (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    nombre VARCHAR(100) NOT NULL,
+    tipo VARCHAR(50),
+    documento VARCHAR(30) NOT NULL,
     contacto VARCHAR(100),
+    email VARCHAR(100),
+    telefono VARCHAR(20),
+    estado VARCHAR(20) NOT NULL
 );
 
--- ============================================
--- TABLA: Pedidos
--- ============================================
-CREATE TABLE Pedidos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    producto_id INT,
-    estado VARCHAR(50),
-    cantidad INT,
-    fecha_pedido DATE,
-    total_pedidos DECIMAL(10,2),
-    registrar_ArimaList_void TEXT,
-    buscar_ArimaList_list VARCHAR(255),
-    listar_ArimaList VARCHAR(255),
-    editar_ArimaList_ArimaList TEXT,
-    combinar_editar_boolean BOOLEAN,
-    ver_detalle_ArimaList TEXT
-);
-
--- ============================================
--- TABLA: Categoria_productos
--- ============================================
-CREATE TABLE Categoria_productos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_categoria VARCHAR(255) NOT NULL,
+CREATE TABLE categoria_productos (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    nombre_categoria VARCHAR(100) NOT NULL,
     descripcion TEXT,
-    registrar_ArimaList_void TEXT,
-    buscar_ArimaList_list VARCHAR(255),
-    listar_ArimaList VARCHAR(255),
-    Alistar_obtIst_ArimaList TEXT,
-    editar_ArimaList_ArimaList TEXT,
-    setIdInt_boolean BOOLEAN,
-    setNombre_boolean BOOLEAN,
-    setDescripcion_ArimaList TEXT
+    estado VARCHAR(20) NOT NULL
 );
 
--- ============================================
--- TABLA: Productos
--- ============================================
-CREATE TABLE Productos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    codigo INT UNIQUE,
-    categoria VARCHAR(255),
-    categoria_id VARCHAR(255),
+CREATE TABLE roles (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    nombre_rol VARCHAR(50) NOT NULL,
     descripcion TEXT,
-    contenido VARCHAR(100),
-    stock_min INT,
-    stock_act INT,
-    estado VARCHAR(50),
-    registrar_ArimaList_void TEXT,
-    buscar_ArimaList_list VARCHAR(255),
-    listar_ArimaList VARCHAR(255),
-    editar_ArimaList_ArimaList TEXT,
-    eliminar_boolean BOOLEAN,
-    ver_detalle_ArimaList TEXT,
-    setIdInt_void VARCHAR(255),
-    FOREIGN KEY (categoria_id) REFERENCES Categoria_productos(id)
+    estado VARCHAR(20) NOT NULL
 );
 
--- ============================================
--- TABLA: Estado_venta
--- ============================================
-CREATE TABLE Estado_venta (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    estado VARCHAR(50) NOT NULL
-);
-
--- ============================================
--- TABLA: Venta
--- ============================================
-CREATE TABLE Venta (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    cliente INT,
-    fecha_Date DATE,
-    fecha_venta DATE,
-    total_decimal DECIMAL(10,2),
-    estado_id INT,
-    estado VARCHAR(50),
-    registrar_ArimaList_void TEXT,
-    buscar_ArimaList_list_id VARCHAR(255),
-    listar_ArimaList VARCHAR(255),
-    editar_boolean BOOLEAN,
-    ver_detalle_ArimaList TEXT,
-    FOREIGN KEY (cliente) REFERENCES Cliente(id),
-    FOREIGN KEY (estado_id) REFERENCES Estado_venta(id)
-);
-
--- ============================================
--- TABLA: Cromoyentes
--- ============================================
-CREATE TABLE Cromoyentes (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    telefono_id VARCHAR(50),
-    direccion_id VARCHAR(255),
-    nombre VARCHAR(255) NOT NULL,
-    hora_time TIME,
-    estado VARCHAR(50),
-    registrar_ArimaList_void TEXT,
-    buscar_boolean BOOLEAN,
-    listar_ArimaList VARCHAR(255),
-    editar_ArimaList TEXT,
-    combinar_editar_ArimaList TEXT
-);
-
--- ============================================
--- TABLA: Roles
--- ============================================
-CREATE TABLE Roles (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_rol VARCHAR(100) NOT NULL,
+CREATE TABLE permisos (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    nombre_permisos VARCHAR(100) NOT NULL,
+    url VARCHAR(150) NOT NULL,
     descripcion TEXT,
-    estado VARCHAR(50),
-    registrar_ArimaList_void TEXT,
-    listar_obtener_ArimaList VARCHAR(255),
-    listar_roles_ArimaList VARCHAR(255),
-    editar_ArimaList_ArimaList TEXT,
-    combinar_editar_ArimaList TEXT
+    estado VARCHAR(20) NOT NULL
 );
 
--- ============================================
--- TABLA: Usuarios
--- ============================================
-CREATE TABLE Usuarios (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL,
-    correo VARCHAR(255) UNIQUE,
-    contraseña VARCHAR(255),
-    rol VARCHAR(100),
-    estado VARCHAR(50),
-    telefono VARCHAR(50),
-    registrar_ArimaList_void TEXT,
-    buscar_ArimaList_list VARCHAR(255),
-    listar_ArimaList VARCHAR(255),
-    Alistar_obtIst_ArimaList TEXT,
-    editar_ArimaList_ArimaList TEXT,
-    eliminar_boolean BOOLEAN,
-    ver_detalle_ArimaList TEXT
-);
+-- =====================================================
+-- 4. TABLAS DEPENDIENTES
+-- =====================================================
 
--- ============================================
--- TABLA: Compra
--- ============================================
-CREATE TABLE Compra (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(255),
-    fecha_Date DATE,
-    numFactura VARCHAR(100),
-    total_decimal DECIMAL(10,2),
-    registrar_ArimaList_void TEXT,
-    buscar_ArimaList_list VARCHAR(255),
-    listar_ArimaList VARCHAR(255),
-    editar_ArimaList_ArimaList TEXT,
-    combinar_editar_boolean BOOLEAN,
-    ver_detalle_ArimaList TEXT
-);
-
--- ============================================
--- TABLA: detalle_compra
--- ============================================
-CREATE TABLE detalle_compra (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    compra_id INT,
-    precio_unitario DECIMAL(10,2),
-    producto VARCHAR(255),
-    registrar_ArimaList_void TEXT,
-    buscar_ArimaList_list VARCHAR(255),
-    listar_ArimaList VARCHAR(255),
-    editar_ArimaList_ArimaList TEXT,
-    combinar_editar_boolean BOOLEAN,
-    ver_detalle_ArimaList TEXT,
-    FOREIGN KEY (compra_id) REFERENCES Compra(id)
-);
-
--- ============================================
--- TABLA: Permisos
--- ============================================
-CREATE TABLE Permisos (
-    rol_id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_permiso VARCHAR(255) NOT NULL,
+CREATE TABLE productos (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    nombre VARCHAR(100) NOT NULL,
+    categoria_id UUID NOT NULL,
     descripcion TEXT,
-    estado VARCHAR(50),
-    listar_permisos_ArimaList VARCHAR(255),
-    Alistar_permiso_Arlist TEXT
+    precio NUMERIC(10,2) NOT NULL CHECK (precio > 0),
+    cantidad INT NOT NULL DEFAULT 0,
+    stock_min INT NOT NULL,
+    stock_max INT NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    CONSTRAINT fk_producto_categoria
+        FOREIGN KEY (categoria_id) REFERENCES categoria_productos(id),
+    CONSTRAINT chk_stock CHECK (stock_min <= stock_max)
 );
 
--- ============================================
--- TABLA: detalle_permiso
--- ============================================
-CREATE TABLE detalle_permiso (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_permiso INT,
-    id_roles INT,
-    FOREIGN KEY (id_permiso) REFERENCES Permisos(rol_id),
-    FOREIGN KEY (id_roles) REFERENCES Roles(id)
+CREATE TABLE usuarios (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    rol_id UUID NOT NULL,
+    contrasena TEXT NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    CONSTRAINT fk_usuario_rol
+        FOREIGN KEY (rol_id) REFERENCES roles(id)
 );
 
--- ============================================
--- ÍNDICES ADICIONALES PARA OPTIMIZACIÓN
--- ============================================
+CREATE TABLE detalle_permisos (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    permiso_id UUID NOT NULL,
+    rol_id UUID NOT NULL,
+    CONSTRAINT fk_detalle_permiso_permiso
+        FOREIGN KEY (permiso_id) REFERENCES permisos(id),
+    CONSTRAINT fk_detalle_permiso_rol
+        FOREIGN KEY (rol_id) REFERENCES roles(id),
+    CONSTRAINT uq_permiso_rol UNIQUE (permiso_id, rol_id)
+);
 
--- Índices en Cliente
-CREATE INDEX idx_cliente_codigo ON Cliente(codigo_cli);
-CREATE INDEX idx_cliente_estado ON Cliente(estado);
+-- =====================================================
+-- 5. COMPRAS
+-- =====================================================
 
--- Índices en Productos
-CREATE INDEX idx_productos_categoria ON Productos(categoria_id);
-CREATE INDEX idx_productos_codigo ON Productos(codigo);
-CREATE INDEX idx_productos_estado ON Productos(estado);
+CREATE TABLE compras (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    proveedor_id UUID NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    fecha DATE NOT NULL,
+    factura_proveedor VARCHAR(50),
+    total_compra NUMERIC(10,2) NOT NULL CHECK (total_compra >= 0),
+    CONSTRAINT fk_compra_proveedor
+        FOREIGN KEY (proveedor_id) REFERENCES proveedor(id)
+);
 
--- Índices en Venta
-CREATE INDEX idx_venta_cliente ON Venta(cliente);
-CREATE INDEX idx_venta_fecha ON Venta(fecha_Date);
-CREATE INDEX idx_venta_estado ON Venta(estado_id);
+CREATE TABLE detalle_compras (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    compra_id UUID NOT NULL,
+    producto_id UUID NOT NULL,
+    cantidad INT NOT NULL CHECK (cantidad > 0),
+    precio_unitario NUMERIC(10,2) NOT NULL CHECK (precio_unitario > 0),
+    CONSTRAINT fk_detalle_compra_compra
+        FOREIGN KEY (compra_id) REFERENCES compra(id) ON DELETE CASCADE,
+    CONSTRAINT fk_detalle_compra_producto
+        FOREIGN KEY (producto_id) REFERENCES producto(id)
+);
 
--- Índices en Usuarios
-CREATE INDEX idx_usuarios_rol ON Usuarios(rol);
-CREATE INDEX idx_usuarios_correo ON Usuarios(correo);
+-- =====================================================
+-- 6. VENTAS
+-- =====================================================
 
--- Índices en Compra
-CREATE INDEX idx_compra_fecha ON Compra(fecha_Date);
-CREATE INDEX idx_compra_factura ON Compra(numFactura);
+CREATE TABLE estado_ventas (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    estado VARCHAR(30) NOT NULL UNIQUE
+);
 
--- ============================================
--- INSERCIÓN DE DATOS INICIALES
--- ============================================
+CREATE TABLE ventas (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    cliente_id UUID NOT NULL,
+    fecha DATE NOT NULL,
+    total_venta NUMERIC(10,2) NOT NULL CHECK (total_venta >= 0),
+    domicilio_id UUID,
+    estado_id UUID NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    CONSTRAINT fk_venta_cliente
+        FOREIGN KEY (cliente_id) REFERENCES cliente(id),
+    CONSTRAINT fk_venta_estado
+        FOREIGN KEY (estado_id) REFERENCES estado_venta(id)
+);
 
--- Estados de venta iniciales
-INSERT INTO Estado_venta (estado) VALUES 
-('Pendiente'),
-('Procesando'),
-('Completada'),
-('Cancelada');
+CREATE TABLE pedidos (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    producto_id UUID NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    fecha DATE NOT NULL,
+    cantidad_productos INT NOT NULL CHECK (cantidad_productos > 0),
+    total_pedido NUMERIC(10,2) NOT NULL CHECK (total_pedido >= 0),
+    CONSTRAINT fk_pedido_producto
+        FOREIGN KEY (producto_id) REFERENCES producto(id)
+);
 
--- Categorías de productos iniciales
-INSERT INTO Categoria_productos (nombre_categoria, descripcion) VALUES
-('Bebidas', 'Productos líquidos para consumo'),
-('Alimentos', 'Productos alimenticios'),
-('Limpieza', 'Productos de limpieza e higiene');
+-- =====================================================
+-- 7. RUTAS, ZONAS Y CRONOGRAMAS
+-- =====================================================
 
--- Roles iniciales
-INSERT INTO Roles (nombre_rol, descripcion, estado) VALUES
-('Administrador', 'Acceso completo al sistema', 'Activo'),
-('Vendedor', 'Gestión de ventas y clientes', 'Activo'),
-('Almacenista', 'Gestión de inventario', 'Activo');
+CREATE TABLE rutas (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    nombre_ruta VARCHAR(100) NOT NULL,
+    origen VARCHAR(100) NOT NULL,
+    destino VARCHAR(100) NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    cliente_id UUID NOT NULL,
+    CONSTRAINT fk_ruta_cliente
+        FOREIGN KEY (cliente_id) REFERENCES cliente(id)
+);
 
--- ============================================
--- FIN DEL SCRIPT
--- ============================================
+CREATE TABLE zonas (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    cliente_id UUID NOT NULL,
+    ruta_id UUID NOT NULL,
+    CONSTRAINT fk_zona_cliente
+        FOREIGN KEY (cliente_id) REFERENCES cliente(id),
+    CONSTRAINT fk_zona_ruta
+        FOREIGN KEY (ruta_id) REFERENCES rutas(id)
+);
+
+CREATE TABLE cronogramas (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    ruta_id UUID NOT NULL,
+    usuario_id UUID NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    CONSTRAINT fk_cronograma_ruta
+        FOREIGN KEY (ruta_id) REFERENCES rutas(id),
+    CONSTRAINT fk_cronograma_usuario
+        FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);

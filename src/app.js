@@ -3,9 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const { errorHandler, notFound } = require('./middlewares/errorHandler');
-const testRoutes = require('./routes/testRoutes');
-const productosRoutes = require('./routes/productosRoutes');
-const clientesRoutes = require('./routes/clientesRoutes');
+const apiRoutes = require('./routes');
 
 const app = express();
 
@@ -44,14 +42,7 @@ app.get('/health', (req, res) => {
 });
 
 // Rutas de la API
-app.use('/api/test', testRoutes);
-app.use('/api/productos', productosRoutes);
-app.use('/api/clientes', clientesRoutes);
-
-// Aquí irán más rutas en el futuro
-// app.use('/api/productos', productosRoutes);
-// app.use('/api/clientes', clientesRoutes);
-// etc...
+app.use('/api', apiRoutes);
 
 // Middleware para rutas no encontradas
 app.use(notFound);
