@@ -69,6 +69,7 @@ const create = async (req, res, next) => {
 
     const { producto_id, tipo, cantidad, precio, observaciones } = value;
     
+    // tipo_entrada_salida enum is defined in schema.sql: 'entrada', 'salida'
     const result = await query(
       `INSERT INTO entradas_salidas (producto_id, tipo, cantidad, precio, observaciones, estado) 
        VALUES ($1, $2::tipo_entrada_salida, $3, $4, $5, $6) RETURNING *`,
@@ -100,6 +101,7 @@ const update = async (req, res, next) => {
 
     const { producto_id, tipo, cantidad, precio, observaciones } = value;
     
+    // tipo_entrada_salida enum is defined in schema.sql: 'entrada', 'salida'
     const result = await query(
       `UPDATE entradas_salidas 
        SET producto_id = $1, tipo = $2::tipo_entrada_salida, cantidad = $3, 
@@ -128,6 +130,7 @@ const update = async (req, res, next) => {
 const toggleEstado = async (req, res, next) => {
   try {
     const { id } = req.params;
+    // tipo_estado_general enum is defined in schema.sql: 'activo', 'inactivo'
     const result = await query(
       `UPDATE entradas_salidas 
        SET estado = CASE 

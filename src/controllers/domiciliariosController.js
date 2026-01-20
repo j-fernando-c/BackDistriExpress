@@ -116,6 +116,7 @@ const update = async (req, res, next) => {
 const toggleEstado = async (req, res, next) => {
   try {
     const { id } = req.params;
+    // tipo_estado_domiciliario enum is defined in schema.sql: 'disponible', 'ocupado', 'inactivo'
     const result = await query(
       `UPDATE domiciliarios 
        SET estado = CASE 
