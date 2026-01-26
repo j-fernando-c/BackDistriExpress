@@ -414,6 +414,27 @@ CREATE INDEX idx_pedido_cliente ON pedidos(cliente_id);
 CREATE INDEX idx_pedido_fecha ON pedidos(fecha);
 CREATE INDEX idx_detalle_pedido_pedido ON detalle_pedidos(pedido_id);
 
+-- Tabla: abonos (pagos parciales a ventas)
+CREATE TABLE abonos (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    venta_id UUID NOT NULL,
+    monto NUMERIC(10,2) NOT NULL CHECK (monto > 0),
+    fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    metodo_pago VARCHAR(100) NOT NULL,
+    referencia_pago VARCHAR(100),
+    descripcion TEXT,
+    usuario_id UUID,
+    fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_abono_venta
+        FOREIGN KEY (venta_id) REFERENCES ventas(id) ON DELETE CASCADE,
+    CONSTRAINT fk_abono_usuario
+        FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+-- Índices en abonos
+CREATE INDEX idx_abono_venta ON abonos(venta_id);
+CREATE INDEX idx_abono_fecha ON abonos(fecha);
+
 -- Índices en usuarios
 CREATE INDEX idx_usuario_rol ON usuarios(rol_id);
 CREATE INDEX idx_usuario_email ON usuarios(email);

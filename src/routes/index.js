@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+const abonosRoutes = require("./abonosRoutes");
 const categoria_productosRoutes = require("./categoria_productosRoutes");
 const clienteRoutes = require("./clienteRoutes");
 const clientesRoutes = require("./clientesRoutes");
@@ -20,6 +21,7 @@ const usuariosRoutes = require("./usuariosRoutes");
 const ventaRoutes = require("./ventaRoutes");
 const zonasRoutes = require("./zonasRoutes");
 
+router.use("/abonos", abonosRoutes);
 router.use("/categoria_productos", categoria_productosRoutes);
 router.use("/cliente", clienteRoutes);
 router.use("/clientes", clientesRoutes);
