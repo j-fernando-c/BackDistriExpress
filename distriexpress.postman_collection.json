@@ -1,201 +1,1657 @@
 {
-	"info": {
-		"_postman_id": "e6f8f7b3-a2b6-4b8a-b823-8ed1b1d2c67b",
-		"name": "BackDistriExpress",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Test",
-			"item": [
-				{ "name": "Test Connection", "request": { "method": "GET", "header": [], "url": { "raw": "{{base_url}}/api/test/connection", "host": ["{{base_url}}"], "path": ["api", "test", "connection"] } }, "response": [] },
-				{ "name": "Get Tables", "request": { "method": "GET", "header": [], "url": { "raw": "{{base_url}}/api/test/tables", "host": ["{{base_url}}"], "path": ["api", "test", "tables"] } }, "response": [] },
-				{ "name": "Setup Database", "request": { "method": "POST", "header": [], "url": { "raw": "{{base_url}}/api/test/setup", "host": ["{{base_url}}"], "path": ["api", "test", "setup"] } }, "response": [] },
-				{ "name": "Get Users (Test)", "request": { "method": "GET", "header": [], "url": { "raw": "{{base_url}}/api/test/users", "host": ["{{base_url}}"], "path": ["api", "test", "users"] } }, "response": [] }
-			]
-		},
+  "info": {
+    "_postman_id": "e6f8f7b3-a2b6-4b8a-b823-8ed1b1d2c67b",
+    "name": "BackDistriExpress",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Test",
+      "item": [
         {
-			"name": "Cliente",
-			"item": [
-				{"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/cliente", "host": ["{{base_url}}"], "path": ["api", "cliente"]}}, "response": []},
-				{"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/cliente/your_id", "host": ["{{base_url}}"], "path": ["api", "cliente", "your_id"]}}, "response": []},
-				{"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre\": \"John Doe\",\n    \"documento\": \"12345678\",\n    \"tipo_documento\": \"CC\",\n    \"email\": \"john.doe@example.com\"\n}"}, "url": {"raw": "{{base_url}}/api/cliente", "host": ["{{base_url}}"], "path": ["api", "cliente"]}}, "response": []},
-				{"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre\": \"Johnathan Doe\",\n    \"documento\": \"87654321\",\n    \"tipo_documento\": \"CE\",\n    \"email\": \"johnathan.doe@example.com\"\n}"}, "url": {"raw": "{{base_url}}/api/cliente/your_id", "host": ["{{base_url}}"], "path": ["api", "cliente", "your_id"]}}, "response": []},
-				{"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/cliente/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "cliente", "your_id", "toggle-estado"]}}, "response": []},
-				{"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/cliente/your_id", "host": ["{{base_url}}"], "path": ["api", "cliente", "your_id"]}}, "response": []}
-			]
-		},
-		{
-			"name": "Clientes",
-			"item": [
-				{"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/clientes", "host": ["{{base_url}}"], "path": ["api", "clientes"]}}, "response": []},
-				{"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/clientes/your_id", "host": ["{{base_url}}"], "path": ["api", "clientes", "your_id"]}}, "response": []},
-				{"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"tipoCliente\": \"Natural\",\n    \"nombres\": \"Juan\",\n    \"apellidos\": \"Perez\",\n    \"email\": \"juan.perez@example.com\",\n    \"telefono\": \"123456789\",\n    \"direccion\": \"Calle Falsa 123\",\n    \"ciudad\": \"Springfield\"\n}"}, "url": {"raw": "{{base_url}}/api/clientes", "host": ["{{base_url}}"], "path": ["api", "clientes"]}}, "response": []},
-				{"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"tipoCliente\": \"Natural\",\n    \"nombres\": \"Juan Alberto\",\n    \"apellidos\": \"Perez Gonzalez\",\n    \"email\": \"juan.perez.new@example.com\",\n    \"telefono\": \"987654321\",\n    \"direccion\": \"Avenida Siempreviva 742\",\n    \"ciudad\": \"Shelbyville\"\n}"}, "url": {"raw": "{{base_url}}/api/clientes/your_id", "host": ["{{base_url}}"], "path": ["api", "clientes", "your_id"]}}, "response": []},
-				{"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/clientes/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "clientes", "your_id", "toggle-estado"]}}, "response": []},
-				{"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/clientes/your_id", "host": ["{{base_url}}"], "path": ["api", "clientes", "your_id"]}}, "response": []}
-			]
-		},
-		{
-			"name": "Categoria Productos",
-			"item": [
-				{"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/categoria_productos", "host": ["{{base_url}}"], "path": ["api", "categoria_productos"]}}, "response": []},
-				{"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/categoria_productos/your_id", "host": ["{{base_url}}"], "path": ["api", "categoria_productos", "your_id"]}}, "response": []},
-				{"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre_categoria\": \"Bebidas\",\n    \"descripcion\": \"Bebidas no alcoholicas\"\n}"}, "url": {"raw": "{{base_url}}/api/categoria_productos", "host": ["{{base_url}}"], "path": ["api", "categoria_productos"]}}, "response": []},
-				{"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre_categoria\": \"Bebidas Alcoholicas\",\n    \"descripcion\": \"Bebidas solo para mayores de 18\"\n}"}, "url": {"raw": "{{base_url}}/api/categoria_productos/your_id", "host": ["{{base_url}}"], "path": ["api", "categoria_productos", "your_id"]}}, "response": []},
-				{"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/categoria_productos/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "categoria_productos", "your_id", "toggle-estado"]}}, "response": []},
-				{"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/categoria_productos/your_id", "host": ["{{base_url}}"], "path": ["api", "categoria_productos", "your_id"]}}, "response": []}
-			]
-		},
-        {
-            "name": "Compras",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/compras", "host": ["{{base_url}}"], "path": ["api", "compras"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/compras/your_id", "host": ["{{base_url}}"], "path": ["api", "compras", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"proveedor_id\": \"your_proveedor_id\",\n    \"estado\": \"Pendiente\",\n    \"fecha\": \"2024-01-01\",\n    \"total_compra\": 100.50\n}"}, "url": {"raw": "{{base_url}}/api/compras", "host": ["{{base_url}}"], "path": ["api", "compras"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"proveedor_id\": \"your_proveedor_id\",\n    \"estado\": \"Completada\",\n    \"fecha\": \"2024-01-02\",\n    \"total_compra\": 150.00\n}"}, "url": {"raw": "{{base_url}}/api/compras/your_id", "host": ["{{base_url}}"], "path": ["api", "compras", "your_id"]}}, "response": []},
-                {"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/compras/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "compras", "your_id", "toggle-estado"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/compras/your_id", "host": ["{{base_url}}"], "path": ["api", "compras", "your_id"]}}, "response": []}
-            ]
+          "name": "Test Connection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/test/connection",
+              "host": ["{{base_url}}"],
+              "path": ["api", "test", "connection"]
+            }
+          },
+          "response": []
         },
         {
-            "name": "Cronogramas",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/cronogramas", "host": ["{{base_url}}"], "path": ["api", "cronogramas"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/cronogramas/your_id", "host": ["{{base_url}}"], "path": ["api", "cronogramas", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"ruta_id\": \"your_ruta_id\",\n    \"usuario_id\": \"your_user_id\",\n    \"fecha\": \"2024-01-10\",\n    \"hora\": \"10:00:00\"\n}"}, "url": {"raw": "{{base_url}}/api/cronogramas", "host": ["{{base_url}}"], "path": ["api", "cronogramas"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"ruta_id\": \"your_ruta_id\",\n    \"usuario_id\": \"your_user_id\",\n    \"fecha\": \"2024-01-11\",\n    \"hora\": \"11:00:00\"\n}"}, "url": {"raw": "{{base_url}}/api/cronogramas/your_id", "host": ["{{base_url}}"], "path": ["api", "cronogramas", "your_id"]}}, "response": []},
-                {"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/cronogramas/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "cronogramas", "your_id", "toggle-estado"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/cronogramas/your_id", "host": ["{{base_url}}"], "path": ["api", "cronogramas", "your_id"]}}, "response": []}
-            ]
+          "name": "Get Tables",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/test/tables",
+              "host": ["{{base_url}}"],
+              "path": ["api", "test", "tables"]
+            }
+          },
+          "response": []
         },
         {
-			"name": "Detalle Compra",
-			"item": [
-				{"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/detalle_compra", "host": ["{{base_url}}"], "path": ["api", "detalle_compra"]}}, "response": []},
-				{"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/detalle_compra/your_id", "host": ["{{base_url}}"], "path": ["api", "detalle_compra", "your_id"]}}, "response": []},
-				{"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"compra_id\": \"your_compra_id\",\n    \"producto_id\": \"your_producto_id\",\n    \"cantidad\": 5,\n    \"precio_unitario\": 10.50\n}"}, "url": {"raw": "{{base_url}}/api/detalle_compra", "host": ["{{base_url}}"], "path": ["api", "detalle_compra"]}}, "response": []},
-				{"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"compra_id\": \"your_compra_id\",\n    \"producto_id\": \"your_producto_id\",\n    \"cantidad\": 10,\n    \"precio_unitario\": 12.00\n}"}, "url": {"raw": "{{base_url}}/api/detalle_compra/your_id", "host": ["{{base_url}}"], "path": ["api", "detalle_compra", "your_id"]}}, "response": []},
-				{"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/detalle_compra/your_id", "host": ["{{base_url}}"], "path": ["api", "detalle_compra", "your_id"]}}, "response": []}
-			]
-		},
-        {
-            "name": "Detalle Permiso",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/detalle_permiso", "host": ["{{base_url}}"], "path": ["api", "detalle_permiso"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/detalle_permiso/your_id", "host": ["{{base_url}}"], "path": ["api", "detalle_permiso", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"permiso_id\": \"your_permiso_id\",\n    \"rol_id\": \"your_rol_id\"\n}"}, "url": {"raw": "{{base_url}}/api/detalle_permiso", "host": ["{{base_url}}"], "path": ["api", "detalle_permiso"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"permiso_id\": \"your_permiso_id\",\n    \"rol_id\": \"your_rol_id\"\n}"}, "url": {"raw": "{{base_url}}/api/detalle_permiso/your_id", "host": ["{{base_url}}"], "path": ["api", "detalle_permiso", "your_id"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/detalle_permiso/your_id", "host": ["{{base_url}}"], "path": ["api", "detalle_permiso", "your_id"]}}, "response": []}
-            ]
+          "name": "Setup Database",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/test/setup",
+              "host": ["{{base_url}}"],
+              "path": ["api", "test", "setup"]
+            }
+          },
+          "response": []
         },
         {
-            "name": "Estado Venta",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/estado_venta", "host": ["{{base_url}}"], "path": ["api", "estado_venta"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/estado_venta/your_id", "host": ["{{base_url}}"], "path": ["api", "estado_venta", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"estado\": \"Nueva\"\n}"}, "url": {"raw": "{{base_url}}/api/estado_venta", "host": ["{{base_url}}"], "path": ["api", "estado_venta"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"estado\": \"En Proceso\"\n}"}, "url": {"raw": "{{base_url}}/api/estado_venta/your_id", "host": ["{{base_url}}"], "path": ["api", "estado_venta", "your_id"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/estado_venta/your_id", "host": ["{{base_url}}"], "path": ["api", "estado_venta", "your_id"]}}, "response": []}
-            ]
-        },
-        {
-            "name": "Pedidos",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/pedidos", "host": ["{{base_url}}"], "path": ["api", "pedidos"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/pedidos/your_id", "host": ["{{base_url}}"], "path": ["api", "pedidos", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"producto_id\": \"your_producto_id\",\n    \"estado\": \"Pendiente\",\n    \"fecha\": \"2024-01-10\",\n    \"cantidad_productos\": 10,\n    \"total_pedido\": 250.00\n}"}, "url": {"raw": "{{base_url}}/api/pedidos", "host": ["{{base_url}}"], "path": ["api", "pedidos"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"producto_id\": \"your_producto_id\",\n    \"estado\": \"Enviado\",\n    \"fecha\": \"2024-01-11\",\n    \"cantidad_productos\": 12,\n    \"total_pedido\": 300.00\n}"}, "url": {"raw": "{{base_url}}/api/pedidos/your_id", "host": ["{{base_url}}"], "path": ["api", "pedidos", "your_id"]}}, "response": []},
-                {"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/pedidos/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "pedidos", "your_id", "toggle-estado"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/pedidos/your_id", "host": ["{{base_url}}"], "path": ["api", "pedidos", "your_id"]}}, "response": []}
-            ]
-        },
-        {
-            "name": "Permisos",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/permisos", "host": ["{{base_url}}"], "path": ["api", "permisos"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/permisos/your_id", "host": ["{{base_url}}"], "path": ["api", "permisos", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre_permisos\": \"read:users\",\n    \"url\": \"/api/users\",\n    \"descripcion\": \"Read all users\"\n}"}, "url": {"raw": "{{base_url}}/api/permisos", "host": ["{{base_url}}"], "path": ["api", "permisos"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre_permisos\": \"write:users\",\n    \"url\": \"/api/users\",\n    \"descripcion\": \"Create/Update users\"\n}"}, "url": {"raw": "{{base_url}}/api/permisos/your_id", "host": ["{{base_url}}"], "path": ["api", "permisos", "your_id"]}}, "response": []},
-                {"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/permisos/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "permisos", "your_id", "toggle-estado"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/permisos/your_id", "host": ["{{base_url}}"], "path": ["api", "permisos", "your_id"]}}, "response": []}
-            ]
-        },
-        {
-            "name": "Producto",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/producto", "host": ["{{base_url}}"], "path": ["api", "producto"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/producto/your_id", "host": ["{{base_url}}"], "path": ["api", "producto", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre\": \"Another Product\",\n    \"categoria_id\": \"your_category_id\",\n    \"precio\": 50.00,\n    \"cantidad\": 50,\n    \"stock_min\": 5,\n    \"stock_max\": 100\n}"}, "url": {"raw": "{{base_url}}/api/producto", "host": ["{{base_url}}"], "path": ["api", "producto"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre\": \"Updated Another Product\",\n    \"categoria_id\": \"your_category_id\",\n    \"precio\": 55.50,\n    \"cantidad\": 60,\n    \"stock_min\": 10,\n    \"stock_max\": 120\n}"}, "url": {"raw": "{{base_url}}/api/producto/your_id", "host": ["{{base_url}}"], "path": ["api", "producto", "your_id"]}}, "response": []},
-                {"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/producto/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "producto", "your_id", "toggle-estado"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/producto/your_id", "host": ["{{base_url}}"], "path": ["api", "producto", "your_id"]}}, "response": []}
-            ]
-        },
-        {
-            "name": "Proveedor",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/proveedores", "host": ["{{base_url}}"], "path": ["api", "proveedores"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/proveedores/your_id", "host": ["{{base_url}}"], "path": ["api", "proveedores", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre\": \"Proveedor SAS\",\n    \"documento\": \"123456-7\"\n}"}, "url": {"raw": "{{base_url}}/api/proveedores", "host": ["{{base_url}}"], "path": ["api", "proveedores"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre\": \"Proveedor INC\",\n    \"documento\": \"876543-2\"\n}"}, "url": {"raw": "{{base_url}}/api/proveedores/your_id", "host": ["{{base_url}}"], "path": ["api", "proveedores", "your_id"]}}, "response": []},
-                {"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/proveedores/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "proveedores", "your_id", "toggle-estado"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/proveedores/your_id", "host": ["{{base_url}}"], "path": ["api", "proveedores", "your_id"]}}, "response": []}
-            ]
-        },
-        {
-            "name": "Roles",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/roles", "host": ["{{base_url}}"], "path": ["api", "roles"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/roles/your_id", "host": ["{{base_url}}"], "path": ["api", "roles", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre_rol\": \"Admin\",\n    \"descripcion\": \"Administrator role\"\n}"}, "url": {"raw": "{{base_url}}/api/roles", "host": ["{{base_url}}"], "path": ["api", "roles"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre_rol\": \"Super Admin\",\n    \"descripcion\": \"Super administrator role\"\n}"}, "url": {"raw": "{{base_url}}/api/roles/your_id", "host": ["{{base_url}}"], "path": ["api", "roles", "your_id"]}}, "response": []},
-                {"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/roles/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "roles", "your_id", "toggle-estado"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/roles/your_id", "host": ["{{base_url}}"], "path": ["api", "roles", "your_id"]}}, "response": []}
-            ]
-        },
-        {
-            "name": "Rutas",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/rutas", "host": ["{{base_url}}"], "path": ["api", "rutas"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/rutas/your_id", "host": ["{{base_url}}"], "path": ["api", "rutas", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre_ruta\": \"Ruta 1\",\n    \"origen\": \"Bodega Central\",\n    \"destino\": \"Zona Norte\",\n    \"cliente_id\": \"your_cliente_id\"\n}"}, "url": {"raw": "{{base_url}}/api/rutas", "host": ["{{base_url}}"], "path": ["api", "rutas"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre_ruta\": \"Ruta 1.1\",\n    \"origen\": \"Bodega Secundaria\",\n    \"destino\": \"Zona Nor-oriental\",\n    \"cliente_id\": \"your_cliente_id\"\n}"}, "url": {"raw": "{{base_url}}/api/rutas/your_id", "host": ["{{base_url}}"], "path": ["api", "rutas", "your_id"]}}, "response": []},
-                {"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/rutas/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "rutas", "your_id", "toggle-estado"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/rutas/your_id", "host": ["{{base_url}}"], "path": ["api", "rutas", "your_id"]}}, "response": []}
-            ]
-        },
-        {
-            "name": "Usuarios",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/usuarios", "host": ["{{base_url}}"], "path": ["api", "usuarios"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/usuarios/your_id", "host": ["{{base_url}}"], "path": ["api", "usuarios", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre\": \"testuser\",\n    \"email\": \"test@example.com\",\n    \"rol_id\": \"your_rol_id\",\n    \"contrasena\": \"password123\"\n}"}, "url": {"raw": "{{base_url}}/api/usuarios", "host": ["{{base_url}}"], "path": ["api", "usuarios"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"nombre\": \"testuser_updated\",\n    \"email\": \"test.updated@example.com\",\n    \"rol_id\": \"your_rol_id\",\n    \"contrasena\": \"newpassword456\"\n}"}, "url": {"raw": "{{base_url}}/api/usuarios/your_id", "host": ["{{base_url}}"], "path": ["api", "usuarios", "your_id"]}}, "response": []},
-                {"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/usuarios/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "usuarios", "your_id", "toggle-estado"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/usuarios/your_id", "host": ["{{base_url}}"], "path": ["api", "usuarios", "your_id"]}}, "response": []}
-            ]
-        },
-        {
-            "name": "Venta",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/ventas", "host": ["{{base_url}}"], "path": ["api", "ventas"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/ventas/your_id", "host": ["{{base_url}}"], "path": ["api", "ventas", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"cliente_id\": \"your_cliente_id\",\n    \"fecha\": \"2024-01-10\",\n    \"total_venta\": 500.00,\n    \"estado_id\": \"your_estado_id\",\n    \"estado\": \"Facturada\"\n}"}, "url": {"raw": "{{base_url}}/api/ventas", "host": ["{{base_url}}"], "path": ["api", "ventas"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"cliente_id\": \"your_cliente_id\",\n    \"fecha\": \"2024-01-11\",\n    \"total_venta\": 550.00,\n    \"estado_id\": \"your_estado_id\",\n    \"estado\": \"Pagada\"\n}"}, "url": {"raw": "{{base_url}}/api/ventas/your_id", "host": ["{{base_url}}"], "path": ["api", "ventas", "your_id"]}}, "response": []},
-                {"name": "Toggle Estado", "request": {"method": "PATCH", "header": [], "url": {"raw": "{{base_url}}/api/ventas/your_id/toggle-estado", "host": ["{{base_url}}"], "path": ["api", "ventas", "your_id", "toggle-estado"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/ventas/your_id", "host": ["{{base_url}}"], "path": ["api", "ventas", "your_id"]}}, "response": []}
-            ]
-        },
-        {
-            "name": "Zonas",
-            "item": [
-                {"name": "Get All", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/zonas", "host": ["{{base_url}}"], "path": ["api", "zonas"]}}, "response": []},
-                {"name": "Get By Id", "request": {"method": "GET", "header": [], "url": {"raw": "{{base_url}}/api/zonas/your_id", "host": ["{{base_url}}"], "path": ["api", "zonas", "your_id"]}}, "response": []},
-                {"name": "Create", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"cliente_id\": \"your_cliente_id\",\n    \"ruta_id\": \"your_ruta_id\"\n}"}, "url": {"raw": "{{base_url}}/api/zonas", "host": ["{{base_url}}"], "path": ["api", "zonas"]}}, "response": []},
-                {"name": "Update", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n    \"cliente_id\": \"your_cliente_id\",\n    \"ruta_id\": \"your_ruta_id\"\n}"}, "url": {"raw": "{{base_url}}/api/zonas/your_id", "host": ["{{base_url}}"], "path": ["api", "zonas", "your_id"]}}, "response": []},
-                {"name": "Delete", "request": {"method": "DELETE", "header": [], "url": {"raw": "{{base_url}}/api/zonas/your_id", "host": ["{{base_url}}"], "path": ["api", "zonas", "your_id"]}}, "response": []}
-            ]
+          "name": "Get Users (Test)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/test/users",
+              "host": ["{{base_url}}"],
+              "path": ["api", "test", "users"]
+            }
+          },
+          "response": []
         }
-	]
+      ]
+    },
+    {
+      "name": "Cliente",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cliente",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cliente"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cliente/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cliente", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"John Doe\",\n    \"documento\": \"12345678\",\n    \"tipo_documento\": \"CC\",\n    \"email\": \"john.doe@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cliente",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cliente"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Johnathan Doe\",\n    \"documento\": \"87654321\",\n    \"tipo_documento\": \"CE\",\n    \"email\": \"johnathan.doe@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cliente/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cliente", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cliente/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cliente", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cliente/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cliente", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"tipoCliente\": \"Natural\",\n    \"nombres\": \"Juan\",\n    \"apellidos\": \"Perez\",\n    \"email\": \"juan.perez@example.com\",\n    \"telefono\": \"123456789\",\n    \"direccion\": \"Calle Falsa 123\",\n    \"ciudad\": \"Springfield\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"tipoCliente\": \"Natural\",\n    \"nombres\": \"Juan Alberto\",\n    \"apellidos\": \"Perez Gonzalez\",\n    \"email\": \"juan.perez.new@example.com\",\n    \"telefono\": \"987654321\",\n    \"direccion\": \"Avenida Siempreviva 742\",\n    \"ciudad\": \"Shelbyville\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Categoria Productos",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/categoria_productos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categoria_productos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/categoria_productos/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categoria_productos", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre_categoria\": \"Bebidas\",\n    \"descripcion\": \"Bebidas no alcoholicas\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categoria_productos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categoria_productos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre_categoria\": \"Bebidas Alcoholicas\",\n    \"descripcion\": \"Bebidas solo para mayores de 18\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categoria_productos/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categoria_productos", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/categoria_productos/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categoria_productos", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/categoria_productos/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categoria_productos", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Compras",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/compras",
+              "host": ["{{base_url}}"],
+              "path": ["api", "compras"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/compras/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "compras", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"proveedor_id\": \"your_proveedor_id\",\n    \"estado\": \"Pendiente\",\n    \"fecha\": \"2024-01-01\",\n    \"total_compra\": 100.50\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/compras",
+              "host": ["{{base_url}}"],
+              "path": ["api", "compras"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"proveedor_id\": \"your_proveedor_id\",\n    \"estado\": \"Completada\",\n    \"fecha\": \"2024-01-02\",\n    \"total_compra\": 150.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/compras/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "compras", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/compras/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "compras", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/compras/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "compras", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cronogramas",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cronogramas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cronogramas"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cronogramas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cronogramas", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"ruta_id\": \"your_ruta_id\",\n    \"usuario_id\": \"your_user_id\",\n    \"fecha\": \"2024-01-10\",\n    \"hora\": \"10:00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cronogramas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cronogramas"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"ruta_id\": \"your_ruta_id\",\n    \"usuario_id\": \"your_user_id\",\n    \"fecha\": \"2024-01-11\",\n    \"hora\": \"11:00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cronogramas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cronogramas", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cronogramas/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cronogramas", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cronogramas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cronogramas", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Detalle Compra",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/detalle_compra",
+              "host": ["{{base_url}}"],
+              "path": ["api", "detalle_compra"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/detalle_compra/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "detalle_compra", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"compra_id\": \"your_compra_id\",\n    \"producto_id\": \"your_producto_id\",\n    \"cantidad\": 5,\n    \"precio_unitario\": 10.50\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/detalle_compra",
+              "host": ["{{base_url}}"],
+              "path": ["api", "detalle_compra"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"compra_id\": \"your_compra_id\",\n    \"producto_id\": \"your_producto_id\",\n    \"cantidad\": 10,\n    \"precio_unitario\": 12.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/detalle_compra/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "detalle_compra", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/detalle_compra/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "detalle_compra", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Detalle Permiso",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/detalle_permiso",
+              "host": ["{{base_url}}"],
+              "path": ["api", "detalle_permiso"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/detalle_permiso/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "detalle_permiso", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"permiso_id\": \"your_permiso_id\",\n    \"rol_id\": \"your_rol_id\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/detalle_permiso",
+              "host": ["{{base_url}}"],
+              "path": ["api", "detalle_permiso"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"permiso_id\": \"your_permiso_id\",\n    \"rol_id\": \"your_rol_id\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/detalle_permiso/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "detalle_permiso", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/detalle_permiso/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "detalle_permiso", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Estado Venta",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/estado_venta",
+              "host": ["{{base_url}}"],
+              "path": ["api", "estado_venta"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/estado_venta/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "estado_venta", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n    \"estado\": \"Nueva\"\n}" },
+            "url": {
+              "raw": "{{base_url}}/api/estado_venta",
+              "host": ["{{base_url}}"],
+              "path": ["api", "estado_venta"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"estado\": \"En Proceso\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/estado_venta/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "estado_venta", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/estado_venta/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "estado_venta", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pedidos",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pedidos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pedidos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pedidos/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pedidos", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"producto_id\": \"your_producto_id\",\n    \"estado\": \"Pendiente\",\n    \"fecha\": \"2024-01-10\",\n    \"cantidad_productos\": 10,\n    \"total_pedido\": 250.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pedidos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pedidos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"producto_id\": \"your_producto_id\",\n    \"estado\": \"Enviado\",\n    \"fecha\": \"2024-01-11\",\n    \"cantidad_productos\": 12,\n    \"total_pedido\": 300.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pedidos/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pedidos", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pedidos/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pedidos", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pedidos/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pedidos", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Permisos",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/permisos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "permisos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/permisos/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "permisos", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre_permisos\": \"read:users\",\n    \"url\": \"/api/users\",\n    \"descripcion\": \"Read all users\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/permisos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "permisos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre_permisos\": \"write:users\",\n    \"url\": \"/api/users\",\n    \"descripcion\": \"Create/Update users\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/permisos/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "permisos", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/permisos/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "permisos", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/permisos/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "permisos", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Producto",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/producto",
+              "host": ["{{base_url}}"],
+              "path": ["api", "producto"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/producto/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "producto", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Another Product\",\n    \"categoria_id\": \"your_category_id\",\n    \"precio\": 50.00,\n    \"cantidad\": 50,\n    \"stock_min\": 5,\n    \"stock_max\": 100\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/producto",
+              "host": ["{{base_url}}"],
+              "path": ["api", "producto"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Updated Another Product\",\n    \"categoria_id\": \"your_category_id\",\n    \"precio\": 55.50,\n    \"cantidad\": 60,\n    \"stock_min\": 10,\n    \"stock_max\": 120\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/producto/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "producto", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/producto/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "producto", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/producto/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "producto", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Proveedor",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/proveedores",
+              "host": ["{{base_url}}"],
+              "path": ["api", "proveedores"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/proveedores/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "proveedores", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Proveedor SAS\",\n    \"documento\": \"123456-7\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/proveedores",
+              "host": ["{{base_url}}"],
+              "path": ["api", "proveedores"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Proveedor INC\",\n    \"documento\": \"876543-2\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/proveedores/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "proveedores", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/proveedores/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "proveedores", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/proveedores/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "proveedores", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Domiciliarios",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/domiciliarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "domiciliarios"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/domiciliarios/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "domiciliarios", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"tipo_documento\": \"CC\",\n    \"documento\": \"123456789\",\n    \"nombre\": \"Repartidor Demo\",\n    \"telefono\": \"3001112233\",\n    \"email\": \"repartidor@example.com\",\n    \"estado\": \"disponible\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/domiciliarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "domiciliarios"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"tipo_documento\": \"CC\",\n    \"documento\": \"123456789\",\n    \"nombre\": \"Repartidor Demo Actualizado\",\n    \"telefono\": \"3009998877\",\n    \"email\": \"repartidor.new@example.com\",\n    \"estado\": \"ocupado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/domiciliarios/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "domiciliarios", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"estado\": \"inactivo\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/domiciliarios/your_id/estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "domiciliarios", "your_id", "estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/domiciliarios/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "domiciliarios", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/roles",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/roles/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre_rol\": \"Admin\",\n    \"descripcion\": \"Administrator role\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/roles",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre_rol\": \"Super Admin\",\n    \"descripcion\": \"Super administrator role\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/roles/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/roles/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/roles/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "roles", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Rutas",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/rutas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "rutas"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/rutas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "rutas", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre_ruta\": \"Ruta 1\",\n    \"origen\": \"Bodega Central\",\n    \"destino\": \"Zona Norte\",\n    \"cliente_id\": \"your_cliente_id\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/rutas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "rutas"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre_ruta\": \"Ruta 1.1\",\n    \"origen\": \"Bodega Secundaria\",\n    \"destino\": \"Zona Nor-oriental\",\n    \"cliente_id\": \"your_cliente_id\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/rutas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "rutas", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/rutas/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "rutas", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/rutas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "rutas", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/usuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"testuser\",\n    \"email\": \"test@example.com\",\n    \"rol_id\": \"your_rol_id\",\n    \"contrasena\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/usuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"testuser_updated\",\n    \"email\": \"test.updated@example.com\",\n    \"rol_id\": \"your_rol_id\",\n    \"contrasena\": \"newpassword456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Venta",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ventas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ventas"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ventas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ventas", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cliente_id\": \"your_cliente_id\",\n    \"fecha\": \"2026-01-21T21:15:18.383Z\",\n    \"total_venta\": 20000.00,\n    \"domiciliario_id\": \"your_domiciliario_id\",\n    \"estado_id\": \"your_estado_id\",\n    \"estado\": \"pendiente\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ventas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ventas"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cliente_id\": \"your_cliente_id\",\n    \"fecha\": \"2026-01-22T10:00:00.000Z\",\n    \"total_venta\": 21000.00,\n    \"domiciliario_id\": \"your_domiciliario_id\",\n    \"estado_id\": \"your_estado_id\",\n    \"estado\": \"entregada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ventas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ventas", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"estado\": \"entregada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ventas/your_id/toggle-estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ventas", "your_id", "toggle-estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ventas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ventas", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Zonas",
+      "item": [
+        {
+          "name": "Get All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/zonas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "zonas"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/zonas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "zonas", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cliente_id\": \"your_cliente_id\",\n    \"ruta_id\": \"your_ruta_id\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/zonas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "zonas"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cliente_id\": \"your_cliente_id\",\n    \"ruta_id\": \"your_ruta_id\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/zonas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "zonas", "your_id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/zonas/your_id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "zonas", "your_id"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }

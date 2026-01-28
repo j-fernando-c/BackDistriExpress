@@ -2,11 +2,21 @@ const Joi = require("joi");
 const { query } = require("../config/database");
 
 const pedidosSchema = Joi.object({
-  producto_id: Joi.string().required(),
-  estado: Joi.string().required().min(2).max(20),
+  cliente_id: Joi.string().required(),
+  domiciliario_id: Joi.string().optional().allow(null),
   fecha: Joi.date().required(),
-  cantidad_productos: Joi.number().integer().min(1).required(),
-  total_pedido: Joi.number().precision(2).min(0).required(),
+  estado: Joi.string()
+    .optional()
+    .valid(
+      "pendiente",
+      "confirmado",
+      "en_preparacion",
+      "enviado",
+      "entregado",
+      "cancelado",
+    )
+    .default("pendiente"),
+  total: Joi.number().precision(2).min(0).required(),
 });
 
 const validatePedidos = (data) =>
@@ -14,7 +24,19 @@ const validatePedidos = (data) =>
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await query("SELECT * FROM pedidos ORDER BY id DESC");
+    const result = await query(
+      `SELECT 
+        p.*,
+        c.nombre as cliente_nombre,
+        c.telefono as cliente_telefono,
+        c.direccion as cliente_direccion,
+        d.nombre as domiciliario_nombre,
+        d.telefono as domiciliario_telefono
+      FROM pedidos p
+      INNER JOIN clientes c ON p.cliente_id = c.id
+      LEFT JOIN domiciliarios d ON p.domiciliario_id = d.id
+      ORDER BY p.fecha_creacion DESC`,
+    );
     res.json({
       success: true,
       data: result.rows,
@@ -29,7 +51,20 @@ const getAll = async (req, res, next) => {
 const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await query("SELECT * FROM pedidos WHERE id = $1", [id]);
+    const result = await query(
+      `SELECT 
+        p.*,
+        c.nombre as cliente_nombre,
+        c.telefono as cliente_telefono,
+        c.direccion as cliente_direccion,
+        d.nombre as domiciliario_nombre,
+        d.telefono as domiciliario_telefono
+      FROM pedidos p
+      INNER JOIN clientes c ON p.cliente_id = c.id
+      LEFT JOIN domiciliarios d ON p.domiciliario_id = d.id
+      WHERE p.id = $1`,
+      [id],
+    );
 
     if (result.rows.length === 0) {
       return res.status(404).json({
@@ -58,18 +93,33 @@ const create = async (req, res, next) => {
       });
     }
 
-    const { producto_id, estado, fecha, cantidad_productos, total_pedido } =
-      value;
+    const { cliente_id, domiciliario_id, fecha, estado, total } = value;
 
     const result = await query(
-      "INSERT INTO pedidos (producto_id, estado, fecha, cantidad_productos, total_pedido) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [producto_id, estado, fecha, cantidad_productos, total_pedido]
+      "INSERT INTO pedidos (cliente_id, domiciliario_id, fecha, estado, total) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [cliente_id, domiciliario_id || null, fecha, estado, total],
+    );
+
+    // Obtener datos completos del pedido con información de cliente y domiciliario
+    const pedidoCompleto = await query(
+      `SELECT 
+        p.*,
+        c.nombre as cliente_nombre,
+        c.telefono as cliente_telefono,
+        c.direccion as cliente_direccion,
+        d.nombre as domiciliario_nombre,
+        d.telefono as domiciliario_telefono
+      FROM pedidos p
+      INNER JOIN clientes c ON p.cliente_id = c.id
+      LEFT JOIN domiciliarios d ON p.domiciliario_id = d.id
+      WHERE p.id = $1`,
+      [result.rows[0].id],
     );
 
     res.status(201).json({
       success: true,
       message: "Pedido creado exitosamente",
-      data: result.rows[0],
+      data: pedidoCompleto.rows[0],
     });
   } catch (error) {
     next(error);
@@ -89,12 +139,11 @@ const update = async (req, res, next) => {
       });
     }
 
-    const { producto_id, estado, fecha, cantidad_productos, total_pedido } =
-      value;
+    const { cliente_id, domiciliario_id, fecha, estado, total } = value;
 
     const result = await query(
-      "UPDATE pedidos SET producto_id = $1, estado = $2, fecha = $3, cantidad_productos = $4, total_pedido = $5 WHERE id = $6 RETURNING *",
-      [producto_id, estado, fecha, cantidad_productos, total_pedido, id]
+      "UPDATE pedidos SET cliente_id = $1, domiciliario_id = $2, fecha = $3, estado = $4, total = $5 WHERE id = $6 RETURNING *",
+      [cliente_id, domiciliario_id || null, fecha, estado, total, id],
     );
 
     if (result.rows.length === 0) {
@@ -104,10 +153,26 @@ const update = async (req, res, next) => {
       });
     }
 
+    // Obtener datos completos del pedido con información de cliente y domiciliario
+    const pedidoCompleto = await query(
+      `SELECT 
+        p.*,
+        c.nombre as cliente_nombre,
+        c.telefono as cliente_telefono,
+        c.direccion as cliente_direccion,
+        d.nombre as domiciliario_nombre,
+        d.telefono as domiciliario_telefono
+      FROM pedidos p
+      INNER JOIN clientes c ON p.cliente_id = c.id
+      LEFT JOIN domiciliarios d ON p.domiciliario_id = d.id
+      WHERE p.id = $1`,
+      [result.rows[0].id],
+    );
+
     res.json({
       success: true,
       message: "Pedido actualizado exitosamente",
-      data: result.rows[0],
+      data: pedidoCompleto.rows[0],
     });
   } catch (error) {
     next(error);
@@ -117,9 +182,26 @@ const update = async (req, res, next) => {
 const toggleEstado = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const { estado } = req.body;
+
+    const validEstados = [
+      "pendiente",
+      "confirmado",
+      "en_preparacion",
+      "enviado",
+      "entregado",
+      "cancelado",
+    ];
+    if (!estado || !validEstados.includes(estado)) {
+      return res.status(400).json({
+        success: false,
+        message: "Estado inválido. Debe ser uno de: " + validEstados.join(", "),
+      });
+    }
+
     const result = await query(
-      "UPDATE pedidos SET estado = CASE WHEN estado = $1 THEN $2 ELSE $1 END WHERE id = $3 RETURNING *",
-      ["Activo", "Inactivo", id]
+      "UPDATE pedidos SET estado = $1 WHERE id = $2 RETURNING *",
+      [estado, id],
     );
 
     if (result.rows.length === 0) {
@@ -129,12 +211,26 @@ const toggleEstado = async (req, res, next) => {
       });
     }
 
+    // Obtener datos completos del pedido con información de cliente y domiciliario
+    const pedidoCompleto = await query(
+      `SELECT 
+        p.*,
+        c.nombre as cliente_nombre,
+        c.telefono as cliente_telefono,
+        c.direccion as cliente_direccion,
+        d.nombre as domiciliario_nombre,
+        d.telefono as domiciliario_telefono
+      FROM pedidos p
+      INNER JOIN clientes c ON p.cliente_id = c.id
+      LEFT JOIN domiciliarios d ON p.domiciliario_id = d.id
+      WHERE p.id = $1`,
+      [result.rows[0].id],
+    );
+
     res.json({
       success: true,
-      message: `Pedido ${
-        result.rows[0].estado === "Activo" ? "activado" : "desactivado"
-      } exitosamente`,
-      data: result.rows[0],
+      message: `Estado del pedido actualizado a: ${estado}`,
+      data: pedidoCompleto.rows[0],
     });
   } catch (error) {
     next(error);
@@ -146,7 +242,7 @@ const deletePedidos = async (req, res, next) => {
     const { id } = req.params;
     const result = await query(
       "DELETE FROM pedidos WHERE id = $1 RETURNING *",
-      [id]
+      [id],
     );
 
     if (result.rows.length === 0) {
