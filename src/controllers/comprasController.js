@@ -14,7 +14,12 @@ const validateCompra = (data) =>
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await query("SELECT * FROM compras ORDER BY id DESC");
+    const result = await query(
+      `SELECT c.*, p.nombre_o_razon_social, p.telefono, p.email
+       FROM compras c 
+       LEFT JOIN proveedores p ON c.proveedor_id = p.id 
+       ORDER BY c.id DESC`,
+    );
     res.json({
       success: true,
       data: result.rows,
@@ -28,7 +33,13 @@ const getAll = async (req, res, next) => {
 const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await query("SELECT * FROM compras WHERE id = $1", [id]);
+    const result = await query(
+      `SELECT c.*, p.nombre_o_razon_social, p.telefono, p.email
+       FROM compras c 
+       LEFT JOIN proveedores p ON c.proveedor_id = p.id 
+       WHERE c.id = $1`,
+      [id],
+    );
 
     if (result.rows.length === 0) {
       return res.status(404).json({
@@ -65,10 +76,19 @@ const create = async (req, res, next) => {
       [proveedor_id, estado, fecha, factura_proveedor || null, total_compra],
     );
 
+    // Obtener la compra con información del proveedor
+    const compraCompleta = await query(
+      `SELECT c.*, p.nombre_o_razon_social, p.telefono, p.email
+       FROM compras c 
+       LEFT JOIN proveedores p ON c.proveedor_id = p.id 
+       WHERE c.id = $1`,
+      [result.rows[0].id],
+    );
+
     res.status(201).json({
       success: true,
       message: "Compra creada exitosamente",
-      data: result.rows[0],
+      data: compraCompleta.rows[0],
     });
   } catch (error) {
     next(error);
@@ -110,10 +130,19 @@ const update = async (req, res, next) => {
       });
     }
 
+    // Obtener la compra con información del proveedor
+    const compraCompleta = await query(
+      `SELECT c.*, p.nombre_o_razon_social, p.telefono, p.email
+       FROM compras c 
+       LEFT JOIN proveedores p ON c.proveedor_id = p.id 
+       WHERE c.id = $1`,
+      [id],
+    );
+
     res.json({
       success: true,
       message: "Compra actualizada exitosamente",
-      data: result.rows[0],
+      data: compraCompleta.rows[0],
     });
   } catch (error) {
     next(error);
@@ -135,10 +164,19 @@ const toggleEstado = async (req, res, next) => {
       });
     }
 
+    // Obtener la compra con información del proveedor
+    const compraCompleta = await query(
+      `SELECT c.*, p.nombre_o_razon_social, p.telefono, p.email
+       FROM compras c 
+       LEFT JOIN proveedores p ON c.proveedor_id = p.id 
+       WHERE c.id = $1`,
+      [id],
+    );
+
     res.json({
       success: true,
-      message: `Compra ${result.rows[0].estado === "Activo" ? "activada" : "desactivada"} exitosamente`,
-      data: result.rows[0],
+      message: `Compra ${compraCompleta.rows[0].estado === "Activo" ? "activada" : "desactivada"} exitosamente`,
+      data: compraCompleta.rows[0],
     });
   } catch (error) {
     next(error);
