@@ -18,11 +18,43 @@ const getAll = async (req, res, next) => {
       `SELECT c.*, p.nombre_o_razon_social, p.telefono, p.email
        FROM compras c 
        LEFT JOIN proveedores p ON c.proveedor_id = p.id 
-       ORDER BY c.id DESC`,
+       ORDER BY c.id DESC
+       `,
     );
+
+    // Obtener todos los detalles de compras con información de productos
+    const detallesResult = await query(
+      `SELECT d.*, 
+              pr.nombre AS producto_nombre,
+              pr.descripcion AS producto_descripcion,
+              pr.precio AS producto_precio,
+              pr.cantidad AS producto_stock,
+              pr.categoria_id AS producto_categoria_id,
+              pr.estado AS producto_estado
+       FROM detalle_compras d
+       INNER JOIN productos pr ON d.producto_id = pr.id
+       ORDER BY d.compra_id, d.id DESC`,
+    );
+
+    // Agrupar detalles por compra_id
+    const detallesPorCompra = {};
+    detallesResult.rows.forEach((detalle) => {
+      if (!detallesPorCompra[detalle.compra_id]) {
+        detallesPorCompra[detalle.compra_id] = [];
+      }
+      detallesPorCompra[detalle.compra_id].push(detalle);
+    });
+
+    // Adicionar productos a cada compra
+    const comprasConProductos = result.rows.map((compra) => ({
+      ...compra,
+      productos: detallesPorCompra[compra.id] || [],
+      productos_count: (detallesPorCompra[compra.id] || []).length,
+    }));
+
     res.json({
       success: true,
-      data: result.rows,
+      data: comprasConProductos,
       count: result.rowCount,
     });
   } catch (error) {
@@ -48,9 +80,28 @@ const getById = async (req, res, next) => {
       });
     }
 
+    const detalleResult = await query(
+      `SELECT d.*, 
+              pr.nombre AS producto_nombre,
+              pr.descripcion AS producto_descripcion,
+              pr.precio AS producto_precio,
+              pr.cantidad AS producto_stock,
+              pr.categoria_id AS producto_categoria_id,
+              pr.estado AS producto_estado
+       FROM detalle_compras d
+       INNER JOIN productos pr ON d.producto_id = pr.id
+       WHERE d.compra_id = $1
+       ORDER BY d.id DESC`,
+      [id],
+    );
+
     res.json({
       success: true,
-      data: result.rows[0],
+      data: {
+        ...result.rows[0],
+        productos: detalleResult.rows,
+        productos_count: detalleResult.rowCount,
+      },
     });
   } catch (error) {
     next(error);
@@ -152,9 +203,21 @@ const update = async (req, res, next) => {
 const toggleEstado = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const { estado } = req.body.estado;
+
+    // Validar que el nuevo estado sea válido
+    const estadosValidos = ["pendiente", "completada", "cancelada"];
+    if (!estadosValidos.includes(estado)) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Estado inválido. Los estados válidos son: pendiente, completada, cancelada",
+      });
+    }
+
     const result = await query(
-      "UPDATE compras SET estado = CASE WHEN estado = $1 THEN $2 ELSE $1 END WHERE id = $3 RETURNING *",
-      ["Activo", "Inactivo", id],
+      "UPDATE compras SET estado = $1 WHERE id = $2 RETURNING *",
+      [estado, id],
     );
 
     if (result.rows.length === 0) {
@@ -175,7 +238,7 @@ const toggleEstado = async (req, res, next) => {
 
     res.json({
       success: true,
-      message: `Compra ${compraCompleta.rows[0].estado === "Activo" ? "activada" : "desactivada"} exitosamente`,
+      message: `Estado de compra actualizado a ${estado} exitosamente`,
       data: compraCompleta.rows[0],
     });
   } catch (error) {
